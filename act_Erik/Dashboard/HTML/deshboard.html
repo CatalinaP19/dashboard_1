@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="es" data-bs-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Profesional - Bootstrap 5.3+ Personalizado</title>
+
+    <!-- Bootstrap 5.3+ CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../CSS/style.css ">
+
+
+</head>
+
+<body>
+    <!-- ========================================
+         SIDEBAR DE NAVEGACIÓN
+         ======================================== -->
+    <div class="dashboard-sidebar" id="sidebar">
+        <!-- Logo y branding -->
+        <div class="p-4 border-bottom border-light border-opacity-25 text-center">
+            <img src="../img/img1.jpeg" class="rounded-circle mb-2 border border-white" alt="Tu Foto"
+                width="120">
+            <h5 class="text-white mb-0 fw-bold">Ana López</h5>
+            <small class="text-white-50">Artista Visual</small>
+        </div>
+
+
+        <!-- Navegación principal -->
+        <nav class="sidebar-nav">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#inicio">
+                        <i class="bi bi-house"></i>
+                        Inicio
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#mis-obras">
+                        <i class="bi bi-image"></i>
+                        Mis Obras
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#categorias">
+                        <i class="bi bi-folder"></i>
+                        Categorías
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#comisiones">
+                        <i class="bi bi-people"></i>
+                        Comisiones
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#agenda">
+                        <i class="bi bi-calendar"></i>
+                        Agenda
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#configuracion">
+                        <i class="bi bi-gear"></i>
+                        Configuración
+                    </a>
+                </li>
+            </ul>
+
+            <div class="px-3 mt-4">
+                <hr class="border-light border-opacity-25">
+                <h6 class="text-white-50 text-uppercase small fw-semibold mb-3">Sígueme</h6>
+                <div class="d-flex gap-2">
+                    <a href="https://instagram.com/tuusuario" class="btn btn-outline-light btn-sm rounded-circle">
+                        <i class="bi bi-instagram"></i>
+                    </a>
+                    <a href="https://behance.net/tuusuario" class="btn btn-outline-light btn-sm rounded-circle">
+                        <i class="bi bi-behance"></i>
+                    </a>
+                    <a href="https://artstation.com/tuusuario" class="btn btn-outline-light btn-sm rounded-circle">
+                        <i class="bi bi-link-45deg"></i>
+                    </a>
+                </div>
+            </div>
+
+
+            <!-- Sección de personalización -->
+            <div class="px-3 mt-4">
+                <hr class="border-light border-opacity-25">
+                <h6 class="text-white-50 text-uppercase small fw-semibold mb-3">
+                    Personalización
+                </h6>
+
+                <!-- Selector de tema -->
+                <div class="mb-3">
+                    <label class="text-white-50 small mb-2">Tema</label>
+                    <select class="form-select form-select-sm" id="themeSelector">
+                        <option value="light">Claro</option>
+                        <option value="dark">Oscuro</option>
+                    </select>
+                </div>
+
+                <!-- Selector de color primario -->
+                <div class="mb-3">
+                    <label class="text-white-50 small mb-2">Color Principal</label>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-sm p-2 rounded-circle" style="background: #6366f1;"
+                            onclick="changeThemeColor('#6366f1', '99, 102, 241')" title="Índigo"></button>
+                        <button class="btn btn-sm p-2 rounded-circle" style="background: #dc2626;"
+                            onclick="changeThemeColor('#dc2626', '220, 38, 38')" title="Rojo"></button>
+                        <button class="btn btn-sm p-2 rounded-circle" style="background: #059669;"
+                            onclick="changeThemeColor('#059669', '5, 150, 105')" title="Verde"></button>
+                        <button class="btn btn-sm p-2 rounded-circle" style="background: #7c3aed;"
+                            onclick="changeThemeColor('#7c3aed', '124, 58, 237')" title="Púrpura"></button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <!-- ========================================
+         ÁREA PRINCIPAL DEL DASHBOARD
+         ======================================== -->
+    <div class="dashboard-main">
+        <!-- Header superior -->
+        <header class="dashboard-header d-flex align-items-center">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <!-- Botón toggle para móvil -->
+                        <button class="btn btn-outline-primary d-lg-none me-3" type="button" onclick="toggleSidebar()">
+                            <i class="bi bi-list"></i>
+                        </button>
+
+                        <!-- Breadcrumb -->
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb custom-breadcrumb mb-0">
+                                <li class="breadcrumb-item">
+                                    <a href="#" class="text-decoration-none">Mi galería</a>
+                                </li>
+                                <li class="breadcrumb-item active">Cr 49B No. 80‑48 Bogotá</li>
+                            </ol>
+                        </nav>
+                    </div>
+
+                    <div class="col-auto">
+                        <!-- Búsqueda -->
+                        <div class="input-group input-group-sm me-3 d-none d-md-flex" style="width: 250px;">
+                            <span class="input-group-text bg-transparent border-end-0">
+                                <i class="bi bi-search text-muted"></i>
+                            </span>
+                            <input type="text" class="form-control border-start-0" placeholder="Buscar...">
+                        </div>
+                    </div>
+
+                    <div class="col-auto">
+                        <!-- Notificaciones y perfil -->
+                        <div class="d-flex align-items-center gap-2">
+                            <button class="btn btn-outline-secondary btn-sm rounded-circle p-2">
+                                <i class="bi bi-bell"></i>
+                            </button>
+                            <div class="dropdown">
+                                <button class="btn btn-primary btn-sm rounded-circle p-2" data-bs-toggle="dropdown">
+                                    <i class="bi bi-person"></i>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li><a class="dropdown-item" href="#">Mi Perfil</a></li>
+                                    <li><a class="dropdown-item" href="#">Configuración</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Contenido principal -->
+        <main class="p-4">
+            <!-- Título de página -->
+            <div class="row mb-4">
+                <div class="col">
+                    <h1 class="h3 fw-bold mb-2">Bienvenido a mi galería virtual</h1>
+                    <p class="text-muted mb-0">
+                        Bienvenid@ a este rincón de luz y pigmento, donde los sueños toman forma y los silencios se pintan de colores.
+                         Cada obra es un suspiro del alma, un instante capturado entre pinceladas y emociones. Recorre este universo íntimo y 
+                         deja que el arte hable por mí.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Tarjetas de estadísticas -->
+            <canvas id="artChart" width="400" height="200"></canvas>
+
+
+            <!-- Gráficos y tablas -->
+            <div class="row g-4">
+
+                <!-- Panel lateral -->
+                <div class="col-12 col-lg-4">
+                    <div class="stat-card card">
+                        <div class="card-header bg-transparent border-bottom">
+                            <h5 class="card-title mb-0 fw-semibold">
+                                Técnicas de pintura húmedas
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="rounded-circle bg-primary bg-opacity-10 p-2 me-3">
+                                    <i class="bi bi-paint-bucket"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <h6 class="mb-0 fw-medium">Acrílico</h6>
+                                    <small class="text-muted">Pintura a base de agua que seca rápidamente</small>
+                                </div>
+                            </div>
+
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="rounded-circle bg-success bg-opacity-10 p-2 me-3">
+                                    <i class="bi bi-droplet-half"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <h6 class="mb-0 fw-medium">Gouache</h6>
+                                    <small class="text-muted">Simila a la acuarela, pero con mayor opacidad</small>
+                                </div>
+                            </div>
+
+                            <div class="d-flex align-items-center">
+                                <div class="rounded-circle bg-warning bg-opacity-10 p-2 me-3">
+                                    <i class="bi bi-palette"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <h6 class="mb-0 fw-medium">Óleo</h6>
+                                    <small class="text-muted"> Utiliza pigmentos mezclados con aceite, permitiendo capas gruesas, 
+                                        mezclas elaboradas y tiempo de secado lento. </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabla de Obras de Arte -->
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="custom-table">
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Obra</th>
+                                        <th>Categoría</th>
+                                        <th>Fecha</th>
+                                        <th>Estado</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <img id="img-obra-1" src="../img/img2.jpeg" class="img-obra rounded me-3" alt="Imagen de la pintura de un atardecer azul">
+                                                <div>
+                                                    <h6 id="title-obra-1" class="mb-0 fw-medium" description="Óleo sobre lienzo, 50x70 cm. Inspirado en los atardeceres del
+                                    Caribe.">Atardecer Azul</h6>
+                                                    <small class="text-muted">Óleo sobre lienzo</small>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td id="type-obra-1">Pintura</td>
+                                        <td id="date-obra-1">10/07/2025</td>
+                                        <td><span id="state-obra-1" class="badge bg-success">Terminado</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary" onclick="openModal('obra-1')">
+                                                <i class="bi bi-eye"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <img id="img-obra-2" src="../img/img3.jpg" class="img-obra rounded me-3" alt="Imagen de la ilustración digital de el espiritu animal">
+                                                <div>
+                                                    <h6 id="title-obra-2" class="mb-0 fw-medium" description="Descripcion de la obra 2">Espíritu Animal</h6>
+                                                    <small class="text-muted">Ilustración digital</small>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td id="type-obra-2">Digital</td>
+                                        <td id="date-obra-2">02/07/2025</td>
+                                        <td><span id="state-obra-2" class="badge bg-warning">En Proceso</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary" onclick="openModal('obra-2')">
+                                                <i class="bi bi-eye"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <img id="img-obra-3" src="../img/img4.jpeg" class="img-obra rounded me-3" alt="Imagen de un mural callejero">
+                                                <div>
+                                                    <h6 id="title-obra-3" class="mb-0 fw-medium" description="Descripcion de la obra 3">Mural Callejero</h6>
+                                                    <small class="text-muted">Spray sobre muro</small>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td id="type-obra-3">Mural</td>
+                                        <td id="date-obra-3">22/06/2025</td>
+                                        <td><span id="state-obra-3" class="badge bg-success">Terminado</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary" onclick="openModal('obra-3')">
+                                                <i class="bi bi-eye"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+
+        <!-- Modal Obra-->
+        <div class="modal hide fade" id="obraModalGeneral" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title fw-bold" id="obraModalLabel">Detalles de la Obra</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row g-4">
+                            <div class="col-12 col-md-6">
+                                <img id="modal-img" src="" class="img-fluid rounded"
+                                    alt="Obra grande">
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <h4 id="modal-obra-title" class="fw-bold mb-2"></h4>
+                                <p id="modal-description" class="text-muted"></p>
+                                <ul class="list-group list-group-flush">
+                                    <li id="modal-type" class="list-group-item"><strong>Categoría:</strong></li>
+                                    <li id="modal-date" class="list-group-item"><strong>Fecha:</strong></li>
+                                    <li id="modal-state" class="list-group-item"><strong>Estado:</strong> <span class="badge bg-success"></span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-sm btn-outline-primary" data-bs-dismiss="modal">
+                            <i class="bi bi-eye-slash"></i> 
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Bootstrap Bundle con Popper (para modals, etc.) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../JS/scrip.js"></script>
+
+</body>
+
+
+</html>
