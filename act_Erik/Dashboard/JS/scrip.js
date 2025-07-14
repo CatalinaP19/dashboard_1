@@ -109,6 +109,19 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!isClickInsideSidebar && !isToggleButton && window.innerWidth <= 991) {
       sidebar.classList.remove('show');
     }
+
+    document.getElementById('buscador').addEventListener('input', function () {
+      const term = this.value.toLowerCase();
+      document.querySelectorAll('.custom-table tbody tr').forEach(row => {
+        row.style.display = row.textContent.toLowerCase().includes(term) ? '' : 'none';
+      });
+    });
+
+    window.addEventListener('load', () => {
+      document.getElementById('loader').classList.add('hide');
+    });
+
+
   });
 
   // Navegación del sidebar
@@ -145,7 +158,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const date = button.getAttribute('data-date') || 'Sin fecha';
       const status = button.getAttribute('data-status') || 'Desconocido';
 
-      
+
       document.getElementById('obraModalLabel').textContent = title;
       document.querySelector('#obraModal .modal-body img').src = img;
       document.querySelector('#obraModal .modal-body img').alt = title;
@@ -157,7 +170,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-    // Animación staggered para las cards
+  // Animación staggered para las cards
   document.querySelectorAll('[data-bs-target="#obraModal2"]').forEach(button => {
     button.addEventListener('click', () => {
       const title = button.getAttribute('data-title') || 'ola';
@@ -167,7 +180,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const date = button.getAttribute('data-date') || 'Sin fecha';
       const status = button.getAttribute('data-status') || 'Desconocido';
 
-      
+
       document.getElementById('obraModalLabel').textContent = title;
       document.querySelector('#obraModal .modal-body img').src = img;
       document.querySelector('#obraModal .modal-body img').alt = title;
@@ -180,53 +193,59 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   // Crear gráfica con Chart.js
+// Obtener el color primario RGB desde la variable CSS
+const primaryRgb = getComputedStyle(document.documentElement)
+  .getPropertyValue('--bs-primary-rgb')
+  .trim();
+
 const ctx = document.getElementById('artChart').getContext('2d');
 const lineWithDots = new Chart(ctx, {
-    type: 'line',
-    data: {
-      datasets: [{
-        label: 'Ingresos por Día',
-        data: [
-          { x: 1, y: 3 },
-          { x: 2, y: 7 },
-          { x: 3, y: 4 },
-          { x: 4, y: 8 },
-          { x: 5, y: 5 }
-        ],
-        fill: false,
-        borderColor: 'rgba(99, 102, 241, 1)',
-        backgroundColor: 'rgba(99, 102, 241, 1)',
-        tension: 0.4,
-        pointRadius: 6,
-        pointHoverRadius: 8,
-        showLine: true
-      }]
-    },
-    options: {
-      responsive: true,
-      plugins: {
-        legend: { display: true },
-        tooltip: {
-          callbacks: {
-            label: function (context) {
-              return `Día ${context.raw.x}: $${context.raw.y}K`;
-            }
+  type: 'line',
+  data: {
+    datasets: [{
+      label: 'Ingresos por Día',
+      data: [
+        { x: 1, y: 3 },
+        { x: 2, y: 7 },
+        { x: 3, y: 4 },
+        { x: 4, y: 8 },
+        { x: 5, y: 5 }
+      ],
+      fill: false,
+      borderColor: `rgba(${primaryRgb}, 1)`,
+      backgroundColor: `rgba(${primaryRgb}, 1)`,
+      tension: 0.4,
+      pointRadius: 6,
+      pointHoverRadius: 8,
+      showLine: true
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { display: true },
+      tooltip: {
+        callbacks: {
+          label: function (context) {
+            return `Día ${context.raw.x}: $${context.raw.y}K`;
           }
         }
+      }
+    },
+    scales: {
+      x: {
+        type: 'linear',
+        title: { display: true, text: 'Día' },
+        ticks: { stepSize: 1 }
       },
-      scales: {
-        x: {
-          type: 'linear',
-          title: { display: true, text: 'Día' },
-          ticks: { stepSize: 1 }
-        },
-        y: {
-          beginAtZero: true,
-          title: { display: true, text: 'Ingresos (en miles)' }
-        }
+      y: {
+        beginAtZero: true,
+        title: { display: true, text: 'Ingresos (en miles)' }
       }
     }
-  });
+  }
+});
+
 
   // Estas funciones globales también van afuera
   function debugCSSVariables() {
@@ -249,7 +268,7 @@ const lineWithDots = new Chart(ctx, {
   // ========================================
 
   // Función para mostrar todas las variables CSS activas
- function debugCSSVariables() {
+  function debugCSSVariables() {
     const computedStyles = getComputedStyle(document.documentElement);
     const variables = {};
 
@@ -274,32 +293,42 @@ const lineWithDots = new Chart(ctx, {
 
 
 
-        document.addEventListener("DOMContentLoaded", function () {
-            document.addEventListener('hide.bs.modal', function (event) {
-                if (document.activeElement) {
-                    document.activeElement.blur();
-                }
-            });
-        });
-        function openModal(obra) {
-            const obraModal = new bootstrap.Modal(document.getElementById("obraModalGeneral"), {});
-            const obraTitle = document.getElementById(`title-${obra}`).innerHTML;
-            const obraImg = document.getElementById(`img-${obra}`).getAttribute('src');
-            const obraType = document.getElementById(`type-${obra}`).innerHTML;
-            const obraDate = document.getElementById(`date-${obra}`).innerHTML;
-            const obraState = document.getElementById(`state-${obra}`).innerHTML;
-            const obraDescription = document.getElementById(`title-${obra}`).getAttribute('description');
+document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener('hide.bs.modal', function (event) {
+    if (document.activeElement) {
+      document.activeElement.blur();
+    }
+  });
+});
+function openModal(obra) {
+  const obraModal = new bootstrap.Modal(document.getElementById("obraModalGeneral"), {});
+  const obraTitle = document.getElementById(`title-${obra}`).innerHTML;
+  const obraImg = document.getElementById(`img-${obra}`).getAttribute('src');
+  const obraType = document.getElementById(`type-${obra}`).innerHTML;
+  const obraDate = document.getElementById(`date-${obra}`).innerHTML;
+  const obraState = document.getElementById(`state-${obra}`).innerHTML;
+  const obraDescription = document.getElementById(`title-${obra}`).getAttribute('description');
 
-            document.getElementById('modal-obra-title').innerHTML = obraTitle;
-            document.getElementById('modal-img').src = obraImg;
-            document.getElementById('modal-type').innerHTML = obraType;
-            document.getElementById('modal-date').innerHTML = obraDate;
-            document.getElementById('modal-state').innerHTML = obraState;
-            document.getElementById('modal-description').innerHTML = obraDescription;
+  document.getElementById('modal-obra-title').innerHTML = obraTitle;
+  document.getElementById('modal-img').src = obraImg;
+  document.getElementById('modal-type').innerHTML = obraType;
+  document.getElementById('modal-date').innerHTML = obraDate;
+  document.getElementById('modal-state').innerHTML = obraState;
+  document.getElementById('modal-description').innerHTML = obraDescription;
 
-            obraModal.show();
-            
-        }
+  obraModal.show();
 
 
-        
+
+}
+function deleteObra() {
+  if (confirm('¿Estás segur@ de que quieres eliminar esta obra?')) {
+    showNotification('Obra eliminada exitosamente.', 'danger');
+    const modal = bootstrap.Modal.getInstance(document.getElementById('obraModalGeneral'));
+    modal.hide();
+  }
+}
+
+
+
+

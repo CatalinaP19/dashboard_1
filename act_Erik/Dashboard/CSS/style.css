@@ -5,9 +5,15 @@
     :root {
         /* === PALETA DE COLORES CORPORATIVA === */
         /* Estos valores pueden cambiarse dinámicamente con JavaScript */
-        --bs-primary: #6366f1;
+
+        /* === NUEVAS VARIABLES DE GRADIENTE DEL SIDEBAR === */
+        --sidebar-gradient-light: linear-gradient(180deg, #b39ddb 0%, #ede7f6 100%);
+        --sidebar-gradient-dark: linear-gradient(180deg, #4b0082 0%, #000000 100%);
+
         /* Índigo moderno */
-        --bs-primary-rgb: 99, 102, 241;
+        --bs-primary-rgb: 99,
+            102,
+            241;
         --bs-secondary: #8b5cf6;
         /* Púrpura elegante */
         --bs-success: #10b981;
@@ -32,7 +38,10 @@
         --dashboard-shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
 
         /* === TIPOGRAFÍA PERSONALIZADA === */
-        --bs-font-sans-serif: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        --bs-font-sans-serif: 'Inter',
+            -apple-system,
+            BlinkMacSystemFont,
+            sans-serif;
         --dashboard-font-weight-medium: 500;
         --dashboard-font-weight-semibold: 600;
 
@@ -51,7 +60,10 @@
 
     /* === MODO OSCURO PERSONALIZADO === */
     [data-bs-theme="dark"] {
-        --bs-primary: #818cf8;
+        /* ...tus otras variables */
+
+        --sidebar-gradient-light: var(--sidebar-gradient-dark);
+
         /* Índigo más claro para mejor contraste */
         --bs-secondary: #a78bfa;
         --bs-success: #34d399;
@@ -79,10 +91,26 @@
         position: fixed;
         top: 0;
         left: 0;
-        background: url('../IMG/textura-arte.jpg') center/cover, linear-gradient(180deg, #4b0082 0%, #000000 100%);
         z-index: 1000;
-        transition: transform 0.3s ease;
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         overflow-y: auto;
+        background: url('../IMG/textura-arte.jpg') center/cover, var(--sidebar-gradient-light);
+    }
+
+    /* === ANIMACIONES MODAL === */
+    .modal.fade .modal-dialog {
+        transition: transform 0.3s ease-out;
+        transform: translateY(-20px);
+    }
+
+    .modal.show .modal-dialog {
+        transform: translateY(0);
+    }
+
+    /* === ESTILOS GENERALES === */
+
+    body {
+        overflow-x: hidden;
     }
 
 
@@ -256,9 +284,9 @@
 
 
     .img-obra {
-    width: 80px;         
-    height: 80px;        
-    object-fit: cover;   
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
     }
 
 
@@ -291,12 +319,132 @@
     }
 
     @keyframes blink {
-  0% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(0.8); opacity: 0.5; }
-  100% { transform: scale(1); opacity: 1; }
+        0% {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        50% {
+            transform: scale(0.8);
+            opacity: 0.5;
+        }
+
+        100% {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
+
+    .eye-blink {
+        animation: blink 0.3s ease-in-out;
+    }
+
+    .btn {
+        transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+        transform: translateY(-2px);
+        opacity: 0.9;
+    }
+
+    #buscador {
+        max-width: 300px;
+    }
+
+    .loader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--bs-light);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: opacity 0.5s;
+    }
+
+    .loader.hide {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    [data-bs-theme="dark"] .loader {
+        background: var(--bs-dark);
+    }
+
+    .btn-success i {
+        font-size: 1.2rem;
+    }
+
+    /* Encabezado de tabla adaptativo */
+    .table-header-custom {
+        background-color: var(--bs-primary);
+        color: white;
+        font-weight: var(--dashboard-font-weight-semibold);
+    }
+
+    /* En modo oscuro: que use dark oscuro y texto claro */
+    [data-bs-theme="dark"] .table-header-custom {
+        background-color: var(--bs-dark);
+        color: var(--bs-light);
+    }
+
+    .btn-dynamic {
+  background-color: var(--bs-primary);
+  color: #fff;
+  border: none;
 }
 
-.eye-blink {
-  animation: blink 0.3s ease-in-out;
+.btn-dynamic:hover {
+  opacity: 0.9;
 }
+
+.badge-dynamic {
+  background-color: var(--bs-primary);
+  color: #fff;
+}
+
+.btn-dynamic {
+  background-color: var(--bs-primary);
+  color: #fff;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.btn-dynamic:hover,
+.btn-dynamic:focus {
+  background-color: rgba(var(--bs-primary-rgb), 0.9);
+  color: #fff;
+  opacity: 0.9;
+}
+
+.btn-outline-dynamic {
+  border: 1px solid var(--bs-primary);
+  color: var(--bs-primary);
+  background-color: transparent;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-dynamic:hover,
+.btn-outline-dynamic:focus {
+  background-color: var(--bs-primary);
+  color: #fff;
+}
+
+.badge-dynamic {
+  background-color: var(--bs-primary);
+  color: #fff;
+  transition: background-color 0.3s ease;
+}
+
+input:focus,
+.form-select:focus {
+  border-color: var(--bs-primary);
+  box-shadow: 0 0 0 0.25rem rgba(var(--bs-primary-rgb), 0.25);
+  outline: none;
+}
+
 
